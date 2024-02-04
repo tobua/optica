@@ -1,0 +1,46 @@
+{
+  "name": "optica",
+  "description": "Responsively scaling CSS properties for JavaScript.",
+  "version": "0.0.0-development",
+  "repository": "github:tobua/optica",
+  "license": "MIT",
+  "author": "Matthias Giger",
+  "scripts": {
+    "build": "padua build"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.0.4",
+    "padua": "^2.0.9"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "default": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "css",
+    "responsive",
+    "fluid",
+    "scale",
+    "javascript"
+  ],
+  "prettier": "padua/configuration/.prettierrc.json",
+  "eslintConfig": {
+    "extends": "./node_modules/padua/configuration/eslint.cjs"
+  },
+  "publishConfig": {
+    "provenance": false
+  },
+  "engines": {
+    "node": ">= 18"
+  }
+}
