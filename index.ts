@@ -10,9 +10,20 @@ export function configure(values: Partial<typeof configuration>) {
   Object.assign(configuration, values)
 }
 
-export function scale(size: number, scalingFactor = configuration.scalingFactor) {
-  const minimumSize = size / scalingFactor
+function getMinimumSize(maximumSize: number, input: number) {
+  if (input < maximumSize / 5) return maximumSize / input
+  if (input > 5) return input
+  if (input < maximumSize / 3 && input < 3) return maximumSize / input
+  return input
+}
+
+export function scale(
+  maximumSize: number,
+  scalingFactorOrMinimumSize = configuration.scalingFactor,
+) {
+  const minimumSize = getMinimumSize(maximumSize, scalingFactorOrMinimumSize)
   const multiplier =
-    (size - minimumSize) / (configuration.maximumViewport - (configuration.minimumViewport - 1))
-  return `clamp(${round(minimumSize)}px, calc(${round(minimumSize - multiplier * configuration.minimumViewport)}px + ${round(multiplier * 100)}vw), ${size}px)`
+    (maximumSize - minimumSize) /
+    (configuration.maximumViewport - (configuration.minimumViewport - 1))
+  return `clamp(${round(minimumSize)}px, calc(${round(minimumSize - multiplier * configuration.minimumViewport)}px + ${round(multiplier * 100)}vw), ${maximumSize}px)`
 }
