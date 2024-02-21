@@ -9,8 +9,8 @@
     "build": "padua build"
   },
   "devDependencies": {
-    "@types/bun": "^1.0.4",
-    "padua": "^2.0.9"
+    "@types/bun": "^1.0.6",
+    "padua": "^3.0.0"
   },
   "type": "module",
   "main": "./dist/index.js",
