@@ -1,13 +1,12 @@
-import { test, expect } from 'bun:test'
-import { scale, configure } from '../index'
+import { expect, test } from 'bun:test'
+import { configure, scale } from '../index'
 
 const getComputedValuesByViewport = (cssExpression: string) => {
-  console.log(cssExpression)
   const regex = /calc\((-?\d*\.?\d+)px\s*\+\s*(-?\d*\.?\d+)vw\)/g
   const matches = [...cssExpression.matchAll(regex)][0]
 
-  const pxValue = parseFloat(matches[1])
-  const vwValue = parseFloat(matches[2])
+  const pxValue = Number.parseFloat(matches[1])
+  const vwValue = Number.parseFloat(matches[2])
 
   const viewportValue = (viewport: number) => Math.round(pxValue + (viewport * vwValue) / 100)
 

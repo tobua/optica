@@ -6,9 +6,7 @@ const configuration = {
 
 const round = (value: number) => Math.round(value * 100) / 100 // Round to two-digits: 12.34
 
-export function configure(values: Partial<typeof configuration>) {
-  Object.assign(configuration, values)
-}
+export const configure = (values: Partial<typeof configuration>) => Object.assign(configuration, values)
 
 function getMinimumSize(maximumSize: number, input: number): number {
   const absInput = Math.abs(input)
@@ -19,28 +17,19 @@ function getMinimumSize(maximumSize: number, input: number): number {
 }
 
 function leftValue(minimumSize: number, maximumSize: number) {
-  if (maximumSize < 0) {
-    return round(Math.min(maximumSize, minimumSize))
-  } else {
-    return round(Math.min(maximumSize, minimumSize))
-  }
+  if (maximumSize < 0) return round(Math.min(maximumSize, minimumSize))
+  return round(Math.min(maximumSize, minimumSize))
 }
 
 function rightValue(minimumSize: number, maximumSize: number) {
-  if (maximumSize < 0) {
-    return round(Math.max(maximumSize, minimumSize))
-  } else {
-    return round(Math.max(maximumSize, minimumSize))
-  }
+  if (maximumSize < 0) return round(Math.max(maximumSize, minimumSize))
+  return round(Math.max(maximumSize, minimumSize))
 }
 
-export function scale(
-  maximumSize: number,
-  scalingFactorOrMinimumSize = configuration.scalingFactor,
-) {
+export function scale(maximumSize: number, scalingFactorOrMinimumSize = configuration.scalingFactor) {
   const minimumSize = getMinimumSize(maximumSize, scalingFactorOrMinimumSize)
-  const multiplier =
-    (maximumSize - minimumSize) /
-    (configuration.maximumViewport - (configuration.minimumViewport - 1))
-  return `clamp(${leftValue(minimumSize, maximumSize)}px, calc(${round(minimumSize - multiplier * configuration.minimumViewport)}px + ${round(multiplier * 100)}vw), ${rightValue(minimumSize, maximumSize)}px)`
+  const multiplier = (maximumSize - minimumSize) / (configuration.maximumViewport - (configuration.minimumViewport - 1))
+  return `clamp(${leftValue(minimumSize, maximumSize)}px, calc(${round(
+    minimumSize - multiplier * configuration.minimumViewport,
+  )}px + ${round(multiplier * 100)}vw), ${rightValue(minimumSize, maximumSize)}px)`
 }
