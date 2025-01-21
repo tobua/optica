@@ -20,6 +20,7 @@ const getComputedValuesByViewport = (cssExpression: string) => {
 }
 
 test('Returns correct clamp function values.', () => {
+  expect(scale(0)).toEqual('0')
   expect(scale(10)).toEqual('clamp(6.67px, calc(5.76px + 0.28vw), 10px)')
   expect(scale(15)).toEqual('clamp(10px, calc(8.65px + 0.42vw), 15px)')
   expect(scale(20)).toEqual('clamp(13.33px, calc(11.53px + 0.56vw), 20px)')

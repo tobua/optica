@@ -27,6 +27,7 @@ function rightValue(minimumSize: number, maximumSize: number) {
 }
 
 export function scale(maximumSize: number, scalingFactorOrMinimumSize = configuration.scalingFactor) {
+  if (maximumSize === 0) return '0'
   const minimumSize = getMinimumSize(maximumSize, scalingFactorOrMinimumSize)
   const multiplier = (maximumSize - minimumSize) / (configuration.maximumViewport - (configuration.minimumViewport - 1))
   return `clamp(${leftValue(minimumSize, maximumSize)}px, calc(${round(

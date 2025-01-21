@@ -6,23 +6,22 @@
   "license": "MIT",
   "author": "Matthias Giger",
   "scripts": {
-    "format": "bun biome format . --write",
-    "lint": "bun biome lint .",
-    "types": "tsc --noEmit"
+    "check": "biome check --write . && biome check --write --config-path=test ./test/*",
+    "types": "tsc"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.6.4",
-    "@types/bun": "^1.0.12",
-    "typescript": "^5.4.5"
+    "@biomejs/biome": "^1.9.4",
+    "@types/bun": "^1.1.18",
+    "typescript": "^5.7.3",
+    "zero-configuration": "^0.17.6"
   },
+  "trustedDependencies": [
+    "zero-configuration"
+  ],
   "type": "module",
   "main": "./index.ts",
   "exports": {
-    ".": {
-      "default": {
-        "default": "./index.ts"
-      }
-    }
+    ".": "./index.ts"
   },
   "files": [
     "*.ts"
@@ -36,5 +35,38 @@
   ],
   "publishConfig": {
     "provenance": true
+  },
+  "configuration": {
+    "gitignore": "recommended",
+    "vscode": "biome",
+    "biome": [
+      {
+        "extends": "recommended",
+        "linter": {
+          "rules": {
+            "style": {
+              "useBlockStatements": "off"
+            }
+          }
+        },
+        "files": {
+          "ignore": [
+            "test"
+          ]
+        }
+      },
+      {
+        "folder": "test",
+        "extends": "test"
+      }
+    ],
+    "typescript": [
+      {
+        "extends": "plugin",
+        "files": [
+          "index.ts"
+        ]
+      }
+    ]
   }
 }
