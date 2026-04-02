@@ -13,7 +13,7 @@
     "@biomejs/biome": "^2.4.10",
     "@types/bun": "^1.3.11",
     "typescript": "^6.0.2",
-    "zero-configuration": "^1.1.0"
+    "zero-configuration": "^1.1.1"
   },
   "trustedDependencies": [
     "zero-configuration"
@@ -65,8 +65,14 @@
     "typescript": [
       {
         "extends": "plugin",
-        "files": [
-          "index.ts"
+        "compilerOptions": {
+          "types": [
+            "bun"
+          ]
+        },
+        "include": [
+          "index.ts",
+          "test/*.test.ts"
         ]
       }
     ]

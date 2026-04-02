@@ -5,8 +5,12 @@ const getComputedValuesByViewport = (cssExpression: string) => {
   const regex = /calc\((-?\d*\.?\d+)px\s*\+\s*(-?\d*\.?\d+)vw\)/g
   const matches = [...cssExpression.matchAll(regex)][0]
 
-  const pxValue = Number.parseFloat(matches[1])
-  const vwValue = Number.parseFloat(matches[2])
+  if (!matches) {
+    throw new Error('Invalid CSS expression')
+  }
+
+  const pxValue = Number.parseFloat(matches[1] ?? '0')
+  const vwValue = Number.parseFloat(matches[2] ?? '0')
 
   const viewportValue = (viewport: number) => Math.round(pxValue + (viewport * vwValue) / 100)
 

@@ -12,7 +12,7 @@ const Constants = {
   inputAbsThresholdMid: 3,
 
   vwFactor: 100,
-} as const
+}
 
 const configuration = {
   minimumViewport: Constants.minimumViewport,
